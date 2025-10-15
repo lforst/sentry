@@ -1073,10 +1073,9 @@ const CheckoutHeader = styled('header')`
 const OrgSlug = styled('div')`
   font-family: ${p => p.theme.text.familyMono};
   color: ${p => p.theme.subText};
-  flex-shrink: 1;
   text-overflow: ellipsis;
   text-wrap: nowrap;
-  width: 100%;
+  flex: 1;
   text-align: right;
 `;
 
