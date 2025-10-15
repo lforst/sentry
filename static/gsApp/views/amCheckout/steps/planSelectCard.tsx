@@ -85,7 +85,7 @@ function PlanSelectCard({
               </Text>
             </Flex>
           </Flex>
-          <Text size="md" variant="muted">
+          <Text size="md" variant="muted" textWrap="balance">
             {description}
           </Text>
         </Flex>
