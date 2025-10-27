@@ -1091,6 +1091,7 @@ const CheckoutBody = styled('div')<{isNewCheckout: boolean}>`
 
       @media (min-width: ${p.theme.breakpoints.md}) {
         max-width: 45rem;
+        padding-top: ${p.theme.space['2xl']};
       }
     `}
 `;
@@ -1109,7 +1110,7 @@ const SidePanel = styled('aside')<{isNewCheckout: boolean}>`
       @media (min-width: ${p.theme.breakpoints.md}) {
         position: sticky;
         right: 0;
-        top: 6rem;
+        top: 7.75rem;
         min-height: 100vh;
         max-width: 26rem;
         border-top: none;
@@ -1153,6 +1154,10 @@ const OverviewContainer = styled('div')<{isNewCheckout: boolean}>`
       position: relative;
       gap: ${p.theme.space.xl};
       padding: ${p.theme.space['2xl']} 0;
+
+      @media (min-width: ${p.theme.breakpoints.md}) {
+        padding: 0;
+      }
     `}
 `;
 
@@ -1162,10 +1167,12 @@ const CheckoutStepsContainer = styled('div')<{isNewCheckout: boolean}>`
     css`
       display: flex;
       flex-direction: column;
-      gap: 80px;
+      gap: ${p.theme.space['3xl']};
 
-      & > * {
-        margin-top: ${p.theme.space.md};
+      & > * + * {
+        border-top: 1px solid ${p.theme.border};
+        padding-top: ${p.theme.space['3xl']};
+        margin-top: ${p.theme.space['3xl']};
       }
     `}
 `;
