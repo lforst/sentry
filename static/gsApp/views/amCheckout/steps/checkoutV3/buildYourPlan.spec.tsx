@@ -59,7 +59,7 @@ describe('BuildYourPlan', () => {
   });
 
   function assertAllSubsteps(isNewCheckout: boolean) {
-    const substepTitles = ['Select additional products'];
+    const substepTitles = ['Detect and fix issues faster with our AI agent'];
 
     if (isNewCheckout) {
       substepTitles.forEach(title => {

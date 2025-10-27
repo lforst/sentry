@@ -230,8 +230,6 @@ const Substep = styled('div')`
   display: flex;
   flex-direction: column;
   gap: ${p => p.theme.space.xl};
-  margin-bottom: ${p => p.theme.space.xl};
-  margin-top: ${p => p.theme.space.xl};
 `;
 
 const OptionGrid = styled('div')<{columns: number}>`
