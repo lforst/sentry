@@ -9,10 +9,11 @@ import mediumStarLight from 'sentry-images/spot/product-select-star-m.svg';
 import smallStarDark from 'sentry-images/spot/product-select-star-s-dark.svg';
 import smallStarLight from 'sentry-images/spot/product-select-star-s.svg';
 
-import {Tag} from 'sentry/components/core/badge/tag';
+import {Tag} from '@sentry/scraps/badge';
+
 import {Button} from 'sentry/components/core/button';
 import {Checkbox} from 'sentry/components/core/checkbox';
-import {Container, Flex} from 'sentry/components/core/layout';
+import {Flex} from 'sentry/components/core/layout';
 import {Separator} from 'sentry/components/core/separator';
 import {Heading, Text} from 'sentry/components/core/text';
 import PanelItem from 'sentry/components/panels/panelItem';
@@ -205,60 +206,50 @@ function ProductSelect({
               isSelected={!!isSelected}
               ariaRole="checkbox"
             >
-              <Flex direction="column" gap="md" padding="xl" width="100%">
-                <Flex align="start" justify="between" gap="md">
-                  <Container paddingTop="sm">
-                    <Checkbox
-                      aria-label={ariaLabel}
-                      aria-checked={isSelected}
-                      checked={isSelected}
-                      onChange={toggleProductOption}
-                      onKeyDown={({key}) => {
-                        if (key === 'Enter') {
-                          toggleProductOption();
-                        }
-                      }}
-                    />
-                  </Container>
-                  <Flex direction="column" gap="0" width="100%">
-                    <Flex align="center" justify="between" gap="sm">
-                      <Heading as="h3" variant="primary">
-                        {toTitleCase(productName, {
-                          allowInnerUpperCase: true,
-                        })}
-                      </Heading>
-                      <ProductIconContainer isSelected={isSelected}>
-                        {productIcon}
-                      </ProductIconContainer>
+              <Flex direction="column" gap="lg" padding="xl" width="100%">
+                <Flex align="center" gap="md">
+                  <Checkbox
+                    aria-label={ariaLabel}
+                    aria-checked={isSelected}
+                    checked={isSelected}
+                    onChange={toggleProductOption}
+                    onKeyDown={({key}) => {
+                      if (key === 'Enter') {
+                        toggleProductOption();
+                      }
+                    }}
+                  />
+                  <Flex align="center" justify="between" gap="sm" flex="1">
+                    <Heading as="h3" variant="primary">
+                      {toTitleCase(productName, {
+                        allowInnerUpperCase: true,
+                      })}
+                    </Heading>
+                    <Flex align="center" gap="md">
+                      {formattedMonthlyBudget && (
+                        <Tag
+                          type="promotion"
+                          data-test-id="product-option-feature-credits"
+                        >
+                          {tct('Includes [includedBudget]/mo in credits', {
+                            includedBudget: formattedMonthlyBudget,
+                          })}
+                        </Tag>
+                      )}
+                      <Flex>
+                        <Text
+                          size="lg"
+                          bold
+                          variant="primary"
+                        >{`+$${priceInDollars}`}</Text>
+                        <Text size="lg" variant="muted">{`/${billingInterval}`}</Text>
+                      </Flex>
                     </Flex>
-                    <ProductDescription isNewCheckout colorOverride={theme.subText}>
-                      {checkoutInfo.getProductDescription(formattedMonthlyBudget ?? '')}
-                    </ProductDescription>
-                    <Container paddingTop="md">
-                      <Text
-                        size="2xl"
-                        bold
-                        variant="primary"
-                      >{`+$${priceInDollars}`}</Text>
-                      <Text size="md" variant="primary">{`/${billingInterval}`}</Text>
-                    </Container>
                   </Flex>
                 </Flex>
                 <Flex direction="column" gap="2xs">
                   <Separator orientation="horizontal" border="primary" />
-                  <Flex direction="column" gap="sm" paddingTop="xl">
-                    <FeatureItem data-test-id="product-option-feature-credits">
-                      <IconContainer>
-                        <IconCheckmark color={theme.successText as Color} />
-                      </IconContainer>
-                      {formattedMonthlyBudget && (
-                        <Text size="md">
-                          {tct('Includes [includedBudget]/mo in credits', {
-                            includedBudget: formattedMonthlyBudget,
-                          })}
-                        </Text>
-                      )}
-                    </FeatureItem>
+                  <Flex direction="column" gap="xl" paddingTop="xl">
                     {Object.entries(checkoutInfo.categoryInfo).map(([category, info]) => {
                       const pricingInfo =
                         activePlan.planCategories[category as DataCategory];
@@ -283,21 +274,21 @@ function ProductSelect({
                           <IconContainer>
                             <IconCheckmark color={theme.successText as Color} />
                           </IconContainer>
-                          <Text size="md">
-                            <FeatureItemCategory>
+                          <Flex direction="column" gap="xs">
+                            <Text size="md">
                               {getSingularCategoryName({
                                 plan: activePlan,
                                 category: category as DataCategory,
                                 hadCustomDynamicSampling: false,
                               })}
-                              {':'}
-                            </FeatureItemCategory>
-                            <span>
-                              {info.description}.{' '}
+                              {' - '}
                               {eventPrice &&
                                 `${utils.displayUnitPrice({cents: eventPrice, minDigits: 0, maxDigits: info.maxEventPriceDigits})}/${perEventNameOverride}`}
-                            </span>
-                          </Text>
+                            </Text>
+                            <Text size="md" variant="muted">
+                              {info.description}
+                            </Text>
+                          </Flex>
                         </FeatureItem>
                       );
                     })}
@@ -716,11 +707,6 @@ const FeatureItem = styled('div')`
   align-items: start;
   color: ${p => p.theme.textColor};
   gap: ${p => p.theme.space.md};
-`;
-
-const FeatureItemCategory = styled('span')`
-  font-weight: ${p => p.theme.fontWeight.bold};
-  margin-right: ${p => p.theme.space.xs};
 `;
 
 const Star1 = styled('img')`

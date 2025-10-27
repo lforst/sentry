@@ -2,8 +2,11 @@ import {Fragment, useMemo, useState} from 'react';
 import styled from '@emotion/styled';
 import moment from 'moment-timezone';
 
+import {Heading} from '@sentry/scraps/text';
+
 import {Tag} from 'sentry/components/core/badge/tag';
-import {Grid} from 'sentry/components/core/layout';
+import {Flex} from 'sentry/components/core/layout';
+import {IconSeer} from 'sentry/icons';
 import {t, tct} from 'sentry/locale';
 import type {Organization} from 'sentry/types/organization';
 import getDaysSinceDate from 'sentry/utils/getDaysSinceDate';
@@ -150,15 +153,20 @@ function AdditionalProductsSubstep({
 }: AdditionalProductsSubstepProps) {
   return (
     <Substep>
-      <SubstepTitle>{t('Select additional products')}</SubstepTitle>
-      <Grid columns={{sm: '1fr', md: '1fr 1fr'}} gap="xl">
+      <Flex align="center" gap="lg">
+        <Flex paddingLeft="lg">
+          <IconSeer size="lg" />
+        </Flex>
+        <Heading as="h2">{t('Detect and fix issues faster with our AI agent')}</Heading>
+      </Flex>
+      <Flex direction="column" gap="xl">
         <ProductSelect
           activePlan={activePlan}
           formData={formData}
           onUpdate={onUpdate}
           isNewCheckout
         />
-      </Grid>
+      </Flex>
     </Substep>
   );
 }
@@ -224,13 +232,6 @@ const Substep = styled('div')`
   gap: ${p => p.theme.space.xl};
   margin-bottom: ${p => p.theme.space.xl};
   margin-top: ${p => p.theme.space.xl};
-`;
-
-const SubstepTitle = styled('h2')`
-  font-size: ${p => p.theme.fontSize['2xl']};
-  font-weight: ${p => p.theme.fontWeight.bold};
-  margin-top: ${p => p.theme.space['2xl']};
-  margin-bottom: 0;
 `;
 
 const OptionGrid = styled('div')<{columns: number}>`
