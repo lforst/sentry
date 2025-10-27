@@ -109,7 +109,7 @@ function PlanSubstep({
   };
 
   return (
-    <Substep>
+    <Flex direction="column" gap="xl">
       <OptionGrid columns={planOptions.length}>
         {planOptions.map(plan => {
           const isSelected = plan.id === formData.plan;
@@ -142,7 +142,7 @@ function PlanSubstep({
         })}
       </OptionGrid>
       <PlanFeatures planOptions={planOptionsWithFree} activePlan={activePlan} />
-    </Substep>
+    </Flex>
   );
 }
 
@@ -152,7 +152,7 @@ function AdditionalProductsSubstep({
   onUpdate,
 }: AdditionalProductsSubstepProps) {
   return (
-    <Substep>
+    <Flex direction="column" gap="xl" paddingTop="3xl">
       <Flex align="center" gap="lg">
         <Flex paddingLeft="lg">
           <IconSeer size="lg" />
@@ -167,7 +167,7 @@ function AdditionalProductsSubstep({
           isNewCheckout
         />
       </Flex>
-    </Substep>
+    </Flex>
   );
 }
 
@@ -224,12 +224,6 @@ const BuildYourPlanContainer = styled('div')`
   gap: ${p => p.theme.space.xl};
   display: flex;
   flex-direction: column;
-`;
-
-const Substep = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: ${p => p.theme.space.xl};
 `;
 
 const OptionGrid = styled('div')<{columns: number}>`
