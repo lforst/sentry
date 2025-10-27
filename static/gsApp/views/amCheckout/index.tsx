@@ -915,15 +915,7 @@ class AMCheckout extends Component<Props, State> {
               <CheckoutOverview {...overviewProps} />
             )}
             <Text>{discountInfo?.disclaimerText}</Text>
-            <Flex
-              direction="row"
-              align="center"
-              justify="between"
-              gap="md"
-              padding="xl"
-              border="primary"
-              radius="lg"
-            >
+            <Flex direction="row" align="center" justify="between" gap="md">
               {t('Have a question?')}
               <TextOverflow>
                 {tct('[help:Find an answer] or [contact]', {

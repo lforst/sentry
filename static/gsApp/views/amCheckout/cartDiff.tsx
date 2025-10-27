@@ -627,7 +627,7 @@ const ChangedCategory = styled('div')`
 `;
 
 const ChangeSection = styled('div')`
-  padding: ${p => p.theme.space.lg} 0;
+  margin-top: ${p => p.theme.space.xl};
 `;
 
 const ChangeGrid = styled('div')`

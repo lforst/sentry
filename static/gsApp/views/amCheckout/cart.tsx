@@ -333,10 +333,17 @@ function SubtotalSummary({
   );
 
   return (
-    <Flex direction="column" width="100%" gap="md" padding="2xl 0" borderTop="primary">
+    <Flex
+      direction="column"
+      width="100%"
+      gap="md"
+      paddingTop="2xl"
+      paddingBottom="lg"
+      borderTop="primary"
+    >
       <Flex data-test-id="summary-item-plan-total" justify="between" align="center">
         <Text size="lg" bold>
-          {t('Plan Total')}
+          {t('Total')}
         </Text>
         <Text align="right" size="lg" bold>
           {previewDataLoading ? (
@@ -524,8 +531,8 @@ function TotalSummary({
       : t('Confirm');
 
   return (
-    <Stack justify="end" borderTop="primary">
-      <Stack paddingTop="3xl" gap="md">
+    <Stack border="primary" radius="lg" padding="2xl xl" gap="lg">
+      <Stack gap="md">
         {isOpen && (
           <Fragment>
             {!previewDataLoading && (
@@ -533,49 +540,67 @@ function TotalSummary({
                 {fees.map(item => {
                   const formattedPrice = utils.displayPrice({cents: item.amount});
                   return (
-                    <Item key={item.type} data-test-id={`summary-item-${item.type}`}>
-                      <ItemWithPrice
-                        item={item.description}
-                        price={formattedPrice}
-                        shouldBoldItem={false}
-                      />
-                    </Item>
+                    <Flex
+                      data-test-id={`summary-item-${item.type}`}
+                      key={item.type}
+                      justify="between"
+                      align="center"
+                      gap="xs"
+                    >
+                      <Text size="md">{item.description}</Text>
+                      <Text align="right" variant="success">
+                        {formattedPrice}
+                      </Text>
+                    </Flex>
                   );
                 })}
                 {onDemandItems.length > 0 && (
-                  <Item data-test-id="summary-item-ondemand-total">
-                    <ItemWithPrice
-                      item={tct('[budgetTerm] usage', {
+                  <Flex
+                    data-test-id="summary-item-ondemand-total"
+                    justify="between"
+                    align="center"
+                    gap="xs"
+                  >
+                    <Text size="md">
+                      {tct('[budgetTerm] usage', {
                         budgetTerm: displayBudgetName(activePlan, {title: true}),
                       })}
-                      price={utils.displayPrice({
+                    </Text>
+                    <Text align="right" variant="success">
+                      {utils.displayPrice({
                         cents: onDemandItems.reduce((sum, item) => sum + item.amount, 0),
                       })}
-                      shouldBoldItem={false}
-                    />
-                  </Item>
+                    </Text>
+                  </Flex>
                 )}
                 {!!creditApplied && (
-                  <Item data-test-id="summary-item-credit_applied">
-                    <ItemWithPrice
-                      item={t('Credit applied')}
-                      price={utils.displayPrice({cents: -creditApplied})}
-                      shouldBoldItem={false}
-                      isCredit
-                    />
-                  </Item>
+                  <Flex
+                    data-test-id="summary-item-credit_applied-flex"
+                    justify="between"
+                    align="center"
+                    gap="xs"
+                  >
+                    <Text size="md">{t('Credit applied')}</Text>
+                    <Text align="right" variant="success">
+                      {utils.displayPrice({cents: -creditApplied})}
+                    </Text>
+                  </Flex>
                 )}
                 {credits.map(item => {
                   const formattedPrice = utils.displayPrice({cents: item.amount});
                   return (
-                    <Item key={item.type} data-test-id={`summary-item-${item.type}`}>
-                      <ItemWithPrice
-                        item={item.description}
-                        price={formattedPrice}
-                        shouldBoldItem={false}
-                        isCredit
-                      />
-                    </Item>
+                    <Flex
+                      data-test-id={`summary-item-${item.type}`}
+                      key={item.type}
+                      justify="between"
+                      align="center"
+                      gap="xs"
+                    >
+                      <Text size="md">{item.description}</Text>
+                      <Text align="right" variant="success">
+                        {formattedPrice}
+                      </Text>
+                    </Flex>
                   );
                 })}
               </Fragment>
@@ -583,7 +608,7 @@ function TotalSummary({
           </Fragment>
         )}
         <Flex justify="between" align="center" data-test-id="summary-item-due-today">
-          <Text bold size="xl">
+          <Text bold size="lg">
             {isDueToday
               ? t('Due today')
               : tct('Due on [date]', {
@@ -591,37 +616,36 @@ function TotalSummary({
                 })}
           </Text>
           {previewDataLoading ? (
-            <Placeholder height="24px" width={PRICE_PLACEHOLDER_WIDTH} />
+            <Placeholder height="16px" width={PRICE_PLACEHOLDER_WIDTH} />
           ) : (
             <Container>
               {isDueToday ? (
                 <Fragment>
                   {originalBilledTotal > billedTotal && (
-                    <Text strikethrough variant="muted" size="xl">
+                    <Text strikethrough variant="muted" size="lg">
                       {utils.displayPrice({
                         cents: originalBilledTotal,
                       })}{' '}
                     </Text>
                   )}
-                  <Text size="xl" bold>
+                  <Text size="lg" bold>
                     {utils.displayPrice({
                       cents: billedTotal,
                     })}
                   </Text>
                 </Fragment>
               ) : (
-                <Text size="xl" bold>
+                <Text size="lg" bold>
                   {utils.displayPrice({
                     cents: billedTotal,
                   })}
                 </Text>
               )}
-              <Text size="md"> USD</Text>
             </Container>
           )}
         </Flex>
       </Stack>
-      <Stack padding="xl 0" gap="lg">
+      <Stack gap="lg">
         <Flex gap="sm" justify="between" align="center">
           {isMigratingPartner && (
             <StyledButton
@@ -855,23 +879,23 @@ function Cart({
             subscription={subscription}
           />
         </Stack>
-        <TotalSummary
-          isOpen={summaryIsOpen}
-          activePlan={activePlan}
-          billedTotal={previewState.billedTotal}
-          buttonDisabled={!hasCompleteBillingInfo}
-          formData={formData}
-          isSubmitting={isSubmitting}
-          originalBilledTotal={previewState.originalBilledTotal}
-          previewData={previewState.previewData}
-          previewDataLoading={previewState.isLoading}
-          renewalDate={previewState.renewalDate}
-          effectiveDate={previewState.effectiveDate}
-          onSubmit={handleConfirmAndPay}
-          organization={organization}
-          subscription={subscription}
-        />
       </Stack>
+      <TotalSummary
+        isOpen={summaryIsOpen}
+        activePlan={activePlan}
+        billedTotal={previewState.billedTotal}
+        buttonDisabled={!hasCompleteBillingInfo}
+        formData={formData}
+        isSubmitting={isSubmitting}
+        originalBilledTotal={previewState.originalBilledTotal}
+        previewData={previewState.previewData}
+        previewDataLoading={previewState.isLoading}
+        renewalDate={previewState.renewalDate}
+        effectiveDate={previewState.effectiveDate}
+        onSubmit={handleConfirmAndPay}
+        organization={organization}
+        subscription={subscription}
+      />
     </Stack>
   );
 }
