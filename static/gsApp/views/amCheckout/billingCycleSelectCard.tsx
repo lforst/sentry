@@ -92,29 +92,32 @@ function BillingCycleSelectCard({
           <RadioMarker isSelected={isSelected} />
         </Container>
         <Flex direction="column" gap="sm" width="100%">
-          <Flex align="center" gap="sm">
-            <Heading as="h3" variant="primary">
-              {intervalName}
-            </Heading>
-            {isAnnual && <Tag type="promotion">{t('save 10%')}</Tag>}
-          </Flex>
-          <Flex align="center" gap="md">
-            {formattedPriceBeforeDiscount && (
+          <Flex justify="between" align="center">
+            <Flex align="center" gap="sm">
+              <Heading as="h3" variant="primary">
+                {intervalName}
+              </Heading>
+              {isAnnual && <Tag type="promotion">{t('save 10%')}</Tag>}
+            </Flex>
+            <Flex align="center" gap="xs">
+              {formattedPriceBeforeDiscount && (
+                <Text
+                  variant="muted"
+                  strikethrough
+                  size="lg"
+                >{`$${formattedPriceBeforeDiscount}`}</Text>
+              )}
               <Text
-                variant="muted"
-                strikethrough
-                size="2xl"
-              >{`$${formattedPriceBeforeDiscount}`}</Text>
-            )}
-            <Text
-              size="2xl"
-              bold
-              variant="primary"
-            >{`$${formattedPriceAfterDiscount}`}</Text>
+                size="lg"
+                bold
+                variant="primary"
+              >{`$${formattedPriceAfterDiscount}`}</Text>
+            </Flex>
           </Flex>
-          <Flex direction="column" gap="xs" paddingTop="xs">
-            <Text variant="muted">{cycleInfo}</Text>
-            <Text variant="muted">{additionalInfo}</Text>
+          <Flex paddingTop="xs">
+            <Text variant="muted" size="sm" textWrap="pretty">
+              {cycleInfo}. {additionalInfo}
+            </Text>
           </Flex>
         </Flex>
       </Flex>
