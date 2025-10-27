@@ -1088,7 +1088,10 @@ const CheckoutBody = styled('div')<{isNewCheckout: boolean}>`
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      max-width: 45rem;
+
+      @media (min-width: ${p.theme.breakpoints.md}) {
+        max-width: 45rem;
+      }
     `}
 `;
 
@@ -1106,7 +1109,7 @@ const SidePanel = styled('aside')<{isNewCheckout: boolean}>`
       @media (min-width: ${p.theme.breakpoints.md}) {
         position: sticky;
         right: 0;
-        top: 0;
+        top: 6rem;
         min-height: 100vh;
         max-width: 26rem;
         border-top: none;
