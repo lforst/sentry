@@ -531,7 +531,7 @@ function TotalSummary({
       : t('Confirm');
 
   return (
-    <Stack border="primary" radius="lg" padding="2xl xl" gap="lg">
+    <Stack border="primary" radius="lg" padding="2xl xl" gap="lg" background="primary">
       <Stack gap="md">
         {isOpen && (
           <Fragment>
@@ -841,7 +841,7 @@ function Cart({
         onToggle={setChangesIsOpen}
         organization={organization}
       />
-      <Stack border="primary" padding="xl" radius="lg">
+      <Stack border="primary" padding="xl" radius="lg" background="primary">
         <Stack align="start" width="100%" gap="sm" height="100%">
           <Stack
             direction="row"

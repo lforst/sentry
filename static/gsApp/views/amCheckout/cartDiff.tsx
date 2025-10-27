@@ -544,6 +544,7 @@ function CartDiff({
       padding="xl"
       radius="lg"
       align="start"
+      background="primary"
     >
       <Stack direction="row" justify="between" align="center" width="100%">
         <Heading as="h3">{t('Changes')}</Heading>

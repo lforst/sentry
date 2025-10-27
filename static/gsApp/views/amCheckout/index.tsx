@@ -1101,15 +1101,17 @@ const SidePanel = styled('aside')<{isNewCheckout: boolean}>`
       display: flex;
       flex-direction: column;
       padding: 0 ${p.theme.space['2xl']};
+      background-color: ${p.theme.backgroundSecondary};
 
       @media (min-width: ${p.theme.breakpoints.md}) {
         position: sticky;
         right: 0;
         top: 0;
         min-height: 100vh;
-        max-width: 480px;
+        max-width: 26rem;
         border-top: none;
         padding-left: ${p.theme.space['3xl']};
+        background-color: ${p.theme.background};
       }
     `}
 
@@ -1147,10 +1149,7 @@ const OverviewContainer = styled('div')<{isNewCheckout: boolean}>`
       flex-direction: column;
       position: relative;
       gap: ${p.theme.space.xl};
-
-      @media (min-width: ${p.theme.breakpoints.md}) {
-        padding-left: ${p.theme.space['2xl']};
-      }
+      padding: ${p.theme.space['2xl']} 0;
     `}
 `;
 
