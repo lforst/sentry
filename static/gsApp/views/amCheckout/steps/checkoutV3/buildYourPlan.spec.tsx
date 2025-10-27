@@ -98,7 +98,7 @@ describe('BuildYourPlan', () => {
   it('renders for checkout v3', async () => {
     renderCheckout(true);
 
-    expect(await screen.findByText('Build your plan')).toBeInTheDocument();
+    expect(await screen.findByText('Select a base plan')).toBeInTheDocument();
     expect(screen.queryByTestId('body-choose-your-plan')).not.toBeInTheDocument();
     assertAllSubsteps(true);
   });
@@ -107,7 +107,7 @@ describe('BuildYourPlan', () => {
     renderCheckout(false);
 
     expect(await screen.findByTestId('body-choose-your-plan')).toBeInTheDocument();
-    expect(screen.queryByText('Build your plan')).not.toBeInTheDocument();
+    expect(screen.queryByText('Select a base plan')).not.toBeInTheDocument();
     assertAllSubsteps(false);
   });
 
