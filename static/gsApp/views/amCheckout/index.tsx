@@ -994,14 +994,14 @@ class AMCheckout extends Component<Props, State> {
                 align="center"
                 maxWidth="82rem"
                 gap="lg"
-                padding="xl 2xl"
+                padding="lg 2xl"
               >
-                <LogoSentry height="24px" />
+                <LogoSentry height="20px" />
                 <LinkButton
                   aria-label={t('Back to Subscription Overview')}
                   to={`/settings/${organization.slug}/billing/`}
                   icon={<IconChevron direction="left" />}
-                  size="md"
+                  size="xs"
                   borderless
                   onClick={() => {
                     trackGetsentryAnalytics('checkout.exit', {
@@ -1091,7 +1091,7 @@ const CheckoutBody = styled('div')<{isNewCheckout: boolean}>`
 
       @media (min-width: ${p.theme.breakpoints.md}) {
         max-width: 45rem;
-        padding-top: ${p.theme.space['2xl']};
+        padding-top: ${p.theme.space.md};
       }
     `}
 `;
@@ -1110,12 +1110,13 @@ const SidePanel = styled('aside')<{isNewCheckout: boolean}>`
       @media (min-width: ${p.theme.breakpoints.md}) {
         position: sticky;
         right: 0;
-        top: 7.75rem;
+        top: 6.25rem;
         min-height: 100vh;
         max-width: 26rem;
         border-top: none;
         padding-left: ${p.theme.space['3xl']};
         background-color: ${p.theme.background};
+        padding-bottom: ${p.theme.space['3xl']};
       }
     `}
 
