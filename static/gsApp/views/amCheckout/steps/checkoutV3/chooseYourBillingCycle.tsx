@@ -43,10 +43,7 @@ function ChooseYourBillingCycle({
         isNewCheckout
       />
       {isOpen && (
-        <Grid
-          columns={{xs: '1fr', md: `repeat(${intervalOptions.length}, 1fr)`}}
-          gap="xl"
-        >
+        <Grid columns={{xs: '1fr', md: `repeat(1, 1fr)`}} gap="md">
           {intervalOptions.map(plan => {
             const isSelected = plan.id === formData.plan;
             const isAnnual = plan.contractInterval === ANNUAL;
